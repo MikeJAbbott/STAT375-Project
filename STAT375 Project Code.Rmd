@@ -1,0 +1,103 @@
+---
+title: "STAT375 Project"
+author: "Michael Abbott"
+date: "4/22/2020"
+output: word_document
+---
+
+```{r}
+dat=read.csv(file=file.choose(),header=T)
+
+plot(dat$AAL_Volume, dat$AALSocialMedia)
+plot(dat$AAL_Open, dat$AALSocialMedia)
+plot(dat$AAL_High, dat$AALSocialMedia)
+plot(dat$AAL_Low, dat$AALSocialMedia)
+plot(dat$AAL_Close, dat$AALSocialMedia)
+plot(dat$AAL_AdjClose, dat$AALSocialMedia)
+
+plot(dat$UAL_Volume, dat$UALSocialMedia)
+plot(dat$UAL_Open, dat$UALSocialMedia)
+plot(dat$UAL_High, dat$UALSocialMedia)
+plot(dat$UAL_Low, dat$UALSocialMedia)
+plot(dat$UAL_Close, dat$UALSocialMedia)
+plot(dat$UAL_AdjClose, dat$UALSocialMedia)
+
+plot(dat$DAL_Volume, dat$DALSocialMedia)
+plot(dat$DAL_Open, dat$DALSocialMedia)
+plot(dat$DAL_High, dat$DALSocialMedia)
+plot(dat$DAL_Low, dat$DALSocialMedia)
+plot(dat$DAL_Close, dat$DALSocialMedia)
+plot(dat$DAL_AdjClose, dat$DALSocialMedia)
+
+plot(dat$SAVE_Volume, dat$SAVESocialMedia)
+plot(dat$SAVE_Open, dat$SAVESoicalMedia)
+plot(dat$SAVE_High, dat$SAVESoicalMedia)
+plot(dat$SAVE_Low, dat$SAVESoicalMedia)
+plot(dat$SAVE_Close, dat$SAVESoicalMedia)
+plot(dat$SAVE_AdjClose, dat$SAVESoicalMedia)
+
+plot(dat$LUV_Volume, dat$LUVSocialMedia)
+plot(dat$LUV_Open, dat$LUVSocialMedia)
+plot(dat$LUV_High, dat$LUVSocialMedia)
+plot(dat$LUV_Low, dat$LUVSocialMedia)
+plot(dat$LUV_Close, dat$LUVSocialMedia)
+plot(dat$LUV_AdjClose, dat$LUVSocialMedia)
+
+plot(dat$JBLU_Volume, dat$JBLUSocialMedia)
+plot(dat$JBLU_Open, dat$JBLUSocialMedia)
+plot(dat$JBLU_High, dat$JBLUSocialMedia)
+plot(dat$JBLU_Low, dat$JBLUSocialMedia)
+plot(dat$JBLU_Close, dat$JBLUSocialMedia)
+plot(dat$JBLU_AdjClose, dat$JBLUSocialMedia)
+
+library(lattice)
+dotplot(dat$JBLU_Volume, dat$JBLUSocialMedia)
+
+
+
+#Example 1 (United):
+library(dtw)
+dtw(dat[,5], dat[,38]) -> UAL.dtw
+summary(UAL.dtw)
+plot(UAL.dtw$index1, UAL.dtw$index2) # Look for straight vertical lines
+
+cor(dat[,5],dat[,38]) # Overall correlation between close and social media
+UAL.dtw$index2 #Look for repeating values
+
+dat[100:120, 5] #Chunk of close data
+dat[100:120, 38] #Chunk of social media data
+cor(dat[110:150, 5], dat[110:150, 38]) # Correlation between the two
+
+
+#Example 2 (Delta):
+dtw(dat[,23], dat[,41]) -> DAL.dtw
+summary(DAL.dtw)
+plot(DAL.dtw$index1, DAL.dtw$index2) # Look for straight vertical lines
+
+cor(dat[,23],dat[,41]) # Overall correlation between close and social media
+DAL.dtw$index2 #Look for repeating values
+
+dat[65:85, 23] #Chunk of close data
+dat[65:85, 41] #Chunk of social media data
+cor(dat[65:85, 23], dat[65:85, 41]) # Correlation between the two
+
+
+#Example 3 & 4 (Southwest):
+dtw(dat[,29], dat[,42]) -> LUV.dtw
+summary(LUV.dtw)
+plot(LUV.dtw$index1, LUV.dtw$index2) # Look for straight vertical lines
+
+cor(dat[,29],dat[42]) # Overall correlation between close and social media
+LUV.dtw$index2 #Look for repeating values
+
+dat[2:22, 29] #Chunk of close data
+dat[2:22, 42] #Chunk of social media data
+cor(dat[2:22, 29], dat[2:22, 42]) # Correlation between the two
+
+dat[150:170, 29] #Chunk of close data
+dat[150:170, 42] #Chunk of social media data
+cor(dat[150:170, 29], dat[150:170, 42]) # Correlation between the two
+
+
+```
+
